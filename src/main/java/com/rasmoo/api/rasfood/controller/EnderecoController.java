@@ -43,4 +43,9 @@ public class EnderecoController {
         }
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
     }
+
+    @GetMapping("/cep/{cep}")
+    ResponseEntity<List<Endereco>> consultarPorCep(@PathVariable("cep") final String cep) {
+        return ResponseEntity.status(HttpStatus.OK).body(this.enderecoRepository.findByCep(cep));
+    }
 }

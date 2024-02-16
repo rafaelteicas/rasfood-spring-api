@@ -11,9 +11,9 @@ public class ClienteId {
     public ClienteId() {
     }
 
-    public ClienteId(String cpf, String email) {
-        this.cpf = cpf;
+    public ClienteId(String email, String cpf) {
         this.email = email;
+        this.cpf = cpf;
     }
 
     public String getCpf() {

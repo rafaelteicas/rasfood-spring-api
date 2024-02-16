@@ -1,11 +1,14 @@
 package com.rasmoo.api.rasfood.entity;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "cardapio")
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Cardapio {
 
     @Id
@@ -18,6 +21,8 @@ public class Cardapio {
 
     private Boolean disponivel;
 
+    private BigDecimal valor;
+
     @Column(name = "data_de_registro")
     private LocalDateTime dataDeRegistro = LocalDateTime.now();
 
@@ -27,10 +32,11 @@ public class Cardapio {
     public Cardapio() {
     }
 
-    public Cardapio(String nome, String descricao, Boolean disponivel, LocalDateTime dataDeRegistro, Categoria categoria) {
+    public Cardapio(String nome, String descricao, Boolean disponivel, BigDecimal valor, LocalDateTime dataDeRegistro, Categoria categoria) {
         this.nome = nome;
         this.descricao = descricao;
         this.disponivel = disponivel;
+        this.valor = valor;
         this.dataDeRegistro = dataDeRegistro;
         this.categoria = categoria;
     }
@@ -83,6 +89,14 @@ public class Cardapio {
         this.categoria = categoria;
     }
 
+    public BigDecimal getValor() {
+        return valor;
+    }
+
+    public void setValor(BigDecimal valor) {
+        this.valor = valor;
+    }
+
     @Override
     public String toString() {
         return "Cardapio{" +
@@ -91,6 +105,7 @@ public class Cardapio {
                 ", descricao='" + descricao + '\'' +
                 ", disponivel=" + disponivel +
                 ", dataDeRegistro=" + dataDeRegistro +
+                ", valor=" + valor +
                 ", categoria=" + categoria +
                 '}';
     }

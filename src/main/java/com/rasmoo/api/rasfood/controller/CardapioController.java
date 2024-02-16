@@ -2,6 +2,7 @@ package com.rasmoo.api.rasfood.controller;
 
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.rasmoo.api.rasfood.dto.CardapioDto;
 import com.rasmoo.api.rasfood.entity.Cardapio;
 import com.rasmoo.api.rasfood.repository.CardapioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,8 +37,20 @@ public class CardapioController {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
     }
 
+    @GetMapping("/{categoria}/disponivel")
+    ResponseEntity<List<Cardapio>> consultarPorCategoria(@PathVariable("categoria") final Integer categoria) {
+        List<Cardapio> cardapioOptional = this.cardapioRepository.findAllByCategoria(categoria);
+        return ResponseEntity.status(HttpStatus.OK).body(cardapioOptional);
+    }
+
+    @GetMapping("/nome/{nome}/disponivel")
+    ResponseEntity<List<CardapioDto>> consultarTodos(@PathVariable("nome") final String nome) {
+        List<CardapioDto> cardapioOptional = this.cardapioRepository.findByNome(nome);
+        return ResponseEntity.status(HttpStatus.OK).body(cardapioOptional);
+    }
+
     @PatchMapping("/{id}")
-    ResponseEntity<Cardapio> editarPorId(@PathVariable("id") final Integer id, Cardapio cardapio) throws JsonMappingException {
+    ResponseEntity<Cardapio> consultarTodos(@PathVariable("id") final Integer id, Cardapio cardapio) throws JsonMappingException {
         Optional<Cardapio> cardapioOptional = this.cardapioRepository.findById(id);
         if(cardapioOptional.isPresent()) {
             objectMapper.updateValue(cardapioOptional.get(), cardapio);

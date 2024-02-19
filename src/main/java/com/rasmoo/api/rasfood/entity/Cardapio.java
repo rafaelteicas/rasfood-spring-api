@@ -23,6 +23,9 @@ public class Cardapio {
 
     private BigDecimal valor;
 
+    @Lob
+    private byte[] img;
+
     @Column(name = "data_de_registro")
     private LocalDateTime dataDeRegistro = LocalDateTime.now();
 
@@ -95,6 +98,14 @@ public class Cardapio {
 
     public void setValor(BigDecimal valor) {
         this.valor = valor;
+    }
+
+    public byte[] getImg() {
+        return img;
+    }
+
+    public void setImg(byte[] img) {
+        this.img = img;
     }
 
     @Override
